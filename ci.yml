@@ -1,0 +1,30 @@
+name: CI Calculadora Promedio
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Validar código (ESLint)
+        run: npx eslint .
+
+      - name: Ejecutar pruebas
+        run: npm test
+
+      - name: Simulación de despliegue
+        run: echo "Deploy exitoso ✅"
