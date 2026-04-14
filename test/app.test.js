@@ -6,7 +6,7 @@ test("calcula promedio ponderado correctamente", () => {
 });
 
 test("calcula con notas iguales", () => {
-  expect(calcularPromedio(50, 50, 50, 50)).toBe(51);
+  expect(calcularPromedio(50, 50, 50, 50)).toBe(50);
 });
 
 test("lanza error si falta una nota", () => {
