@@ -1,0 +1,32 @@
+# Calculadora de Promedios - Pipeline CI/CD
+
+Este proyecto es un microservicio en Node.js que calcula el promedio ponderado de un estudiante. Se ha implementado bajo la cultura DevOps, utilizando Integración Continua (CI) para asegurar la calidad del código en cada actualización.
+
+## 1. Integración Continua (Pipeline y Git)
+Se implementó un pipeline de Integración Continua utilizando **GitHub Actions** (`.github/workflows/ci.yml`). El flujo se acciona automáticamente mediante **Git** con cada `push` a la rama `main`.
+
+El pipeline consta de los siguientes pasos automatizados:
+1. **Clonado del repositorio:** Obtención del código fuente.
+2. **Configuración del entorno:** Preparación de Node.js v18.
+3. **Instalación de dependencias:** Ejecución de `npm install`.
+4. **Validación de código (Linting):** Uso de ESLint para asegurar estándares de calidad.
+5. **Ejecución de Pruebas:** Ejecución automática de la suite mediante `npm test`.
+6. **Simulación de Despliegue:** Confirmación de que el código está listo para producción ("Deploy exitoso ✅").
+
+## 2. Herramientas de Testing
+El entorno de pruebas unitarias se configuró utilizando **Jest**, aprovechando su rapidez y fácil integración en pipelines de Node.js.
+
+## 3. Pruebas Unitarias y Métodos Validados
+El método principal `calcularPromedio` fue sometido a las siguientes validaciones en `app.test.js`:
+
+* **Cálculo correcto de la ponderación:** Se validó la aplicación exacta de los porcentajes (10%, 20%, 30%, 40%).
+* **Comportamiento con notas iguales:** Se verificó que calificaciones idénticas devuelvan el mismo valor final.
+* **Validación de datos faltantes:** Se aseguró el manejo de errores ante valores `null` o `undefined`.
+* **Límites fuera de rango:** Se implementaron bloqueos y alertas ante ingresos de notas mayores a 100 o menores a 1.
+
+## 4. Comandos de Ejecución Local
+Para trabajar con este repositorio localmente, utiliza los siguientes comandos:
+
+* **Instalar dependencias:** `npm install`
+* **Validar linter:** `npx eslint .`
+* **Ejecutar pruebas:** `npm test`
