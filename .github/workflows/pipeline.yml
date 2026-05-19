@@ -2,7 +2,7 @@ name: CI Calculadora Promedio
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   pipeline:
