@@ -1,37 +1,11 @@
-# Calculadora de Promedios - Pipeline CI/CD
+PIPELINE
+    El pipeline es el corazón de la automatización del proyecto, este nos ayuda a poder tener control al momento de enviar la información al repositorio. Cuando se detecta un push, el sistema levanta un entorno limpio; al validar se instalan las dependencias para poder saber si es consistente el código para después saber si se ejecutan las pruebas de los test. Si algo llegara a fallar, el despliegue se detendría y así garantiza que la rama principal pueda mantener un código estable y funcionando.
 
-Este proyecto es un microservicio en Node.js que calcula el promedio ponderado de un estudiante. Se ha implementado bajo la cultura DevOps, utilizando Integración Continua (CI) para asegurar la calidad del código en cada actualización.
+DOCKER
+    Lo que nos ayuda en este proceso es la virtualización mediante contenedores, dejando atrás el clásico problema de que el código solo funciona en una máquina en específico. Si utilizamos una imagen para poder tenerla como base, el contenedor crea el espacio de trabajo para poder tener los objetos o archivos necesarios, así nos ayuda a que el entorno de la aplicación sea exacto sin importar donde se ejecute, con eso nos ayuda a poder tener consistencia desde que lo desarrollamos hasta cuando se despliegue.
 
-## 1. Integración Continua (Pipeline y Git)
+HERRAMIENTAS UTILIZADAS
+    Para lograr esta automatización, cada pieza de software se implementó con un propósito. Se utilizó Node.js para ejecutar nuestra lógica, mientras que Jest actúa como nuestro evaluador para validar que los cálculos de las notas sean siempre los correctos. Por otro lado, ESLint y Prettier nos ayudan a mantener un estándar de calidad y un formato limpio en la escritura del código. Finalmente, Husky funciona como nuestro primer filtro de seguridad local, impidiendo que guardemos cambios mediante un commit si nuestro código contiene errores.
 
-Se implementó un pipeline de Integración Continua utilizando **GitHub Actions** (`.github/workflows/ci.yml`). El flujo se acciona automáticamente mediante **Git** con cada `push` a la rama `main`.
-
-El pipeline consta de los siguientes pasos automatizados:
-
-1. **Clonado del repositorio:** Obtención del código fuente.
-2. **Configuración del entorno:** Preparación de Node.js v18.
-3. **Instalación de dependencias:** Ejecución de `npm install`.
-4. **Validación de código (Linting):** Uso de ESLint para asegurar estándares de calidad.
-5. **Ejecución de Pruebas:** Ejecución automática de la suite mediante `npm test`.
-6. **Simulación de Despliegue:** Confirmación de que el código está listo para producción ("Deploy exitoso ✅").
-
-## 2. Herramientas de Testing
-
-El entorno de pruebas unitarias se configuró utilizando **Jest**, aprovechando su rapidez y fácil integración en pipelines de Node.js.
-
-## 3. Pruebas Unitarias y Métodos Validados
-
-El método principal `calcularPromedio` fue sometido a las siguientes validaciones en `app.test.js`:
-
-- **Cálculo correcto de la ponderación:** Se validó la aplicación exacta de los porcentajes (10%, 20%, 30%, 40%).
-- **Comportamiento con notas iguales:** Se verificó que calificaciones idénticas devuelvan el mismo valor final.
-- **Validación de datos faltantes:** Se aseguró el manejo de errores ante valores `null` o `undefined`.
-- **Límites fuera de rango:** Se implementaron bloqueos y alertas ante ingresos de notas mayores a 100 o menores a 1.
-
-## 4. Comandos de Ejecución Local
-
-Para trabajar con este repositorio localmente, utiliza los siguientes comandos:
-
-- **Instalar dependencias:** `npm install`
-- **Validar linter:** `npx eslint .`
-- **Ejecutar pruebas:** `npm test`
+DIFICULTADES ENCONTRADAS
+    Durante el desarrollo de esta actividad, el principal reto técnico estuvo relacionado con el entorno de virtualización, ya que tuve que actualizar la integración del subsistema de Linux (WSL) para permitir que el motor de Docker operara sin conflictos al construir la imagen. Además, en testing, tuve que cambiar los elementos ya que estaba mal redactada pero fue algo menor.
