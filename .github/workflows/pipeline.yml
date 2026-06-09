@@ -37,7 +37,7 @@ jobs:
             docker stop mi-app || true
             docker rm mi-app || true
             rm -rf proyecto-evaluacion
-            git clone https://github.com/BenRice-K/Cal-devops.git proyecto-evaluacion
+            git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git proyecto-evaluacion
             cd proyecto-evaluacion
             docker build -t imagen-mi-app .
             docker run -d -p 80:3000 --name mi-app imagen-mi-app
