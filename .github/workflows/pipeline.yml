@@ -26,5 +26,19 @@ jobs:
       - name: Ejecutar pruebas
         run: npm test
 
-      - name: Simulación de despliegue
-        run: echo "Deploy exitoso ✅"
+      - name: Deploy to AWS EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USERNAME }}
+          key: ${{ secrets.AWS_KEY }}
+          script: |
+            docker stop mi-app || true
+            docker rm mi-app || true
+            rm -rf proyecto-evaluacion
+            git clone https://github.com/BenRice-K/Cal-devops.git proyecto-evaluacion
+            cd proyecto-evaluacion
+            docker build -t imagen-mi-app .
+            docker run -d -p 80:3000 --name mi-app imagen-mi-app
+
+          
